@@ -4,17 +4,18 @@ using UnityEngine;
 
 public class Chunk : MonoBehaviour {
 
-  public Mesh myMesh;
-	public Material cubeMaterial;
-	public Block[,,] chunkData;
-	int cw;
-	int ch;
-	int cd;
+  public  Mesh      myMesh;
+	public  Material  cubeMaterial;
+	public  Block[,,] chunkData;
+	private int       cw;
+	private int       ch;
+	private int       cd;
 
-	List<Vector3> Verts = new List<Vector3>();
-	List<Vector3> Norms = new List<Vector3>();
-	List<Vector2> UVs = new List<Vector2>();
-	List<int> Tris = new List<int>();
+
+	private List<Vector3> verts   = new List<Vector3>();
+	private List<Vector3> norms   = new List<Vector3>();
+	private List<Vector2> uvs     = new List<Vector2>();
+	private List<int>     tris    = new List<int>();
 
 
 
@@ -23,25 +24,25 @@ public class Chunk : MonoBehaviour {
   ///     BuildChunk
   ///------------------------------------------
   /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/ 
-	void BuildChunk(int sizeX, int sizeY, int sizeZ){
+	void BuildChunk(int pSizeX, int pSizeY, int pSizeZ){
 
-		chunkData = new Block[sizeX, sizeY, sizeZ];
-		cw = sizeX;
-		ch = sizeY;
-		cd = sizeZ;
+		chunkData = new Block[pSizeX, pSizeY, pSizeZ];
+		cw = pSizeX;
+		ch = pSizeY;
+		cd = pSizeZ;
 
 		//create blocks
-		for( int z = 0; z < sizeZ; z++ )
-			for( int y = 0; y < sizeY; y++ )
-				for( int x = 0; x < sizeX; x++ ){
+		for( int z = 0; z < pSizeZ; z++ )
+			for( int y = 0; y < pSizeY; y++ )
+				for( int x = 0; x < pSizeX; x++ ){
 
 					Vector3 pos = new Vector3( x, y, z );
 
 					if ( Random.Range(0,100) < 50 )
-						chunkData[x,y,z] = new Block( Block.BlockType.DIRT, pos, this.gameObject, cubeMaterial );
+						chunkData[x,y,z] = new Block( BlockType.DIRT, pos, this.gameObject, cubeMaterial );
 
 					else
-						chunkData[x,y,z] = new Block( Block.BlockType.AIR, pos, this.gameObject, cubeMaterial );
+						chunkData[x,y,z] = new Block( BlockType.AIR, pos, this.gameObject, cubeMaterial );
 				
         }//END for
 
@@ -57,23 +58,23 @@ public class Chunk : MonoBehaviour {
 	public void DrawChunk(){
 
 		//draw blocks
-		Verts.Clear();
-		Norms.Clear();
-		UVs.Clear();
-		Tris.Clear();
+		verts.Clear();
+		norms.Clear();
+		uvs.Clear();
+		tris.Clear();
 
 		for(int z = 0; z < cd; z++)
 			for(int y = 0; y < ch; y++)
 				for(int x = 0; x < cw; x++)
-					chunkData[x,y,z].Draw(Verts, Norms, UVs, Tris);   
+					chunkData[x,y,z].Draw( verts, norms, uvs, tris );   
 
 		Mesh mesh = new Mesh();
 	  mesh.name = "ScriptedMesh"; 
 
-		mesh.vertices = Verts.ToArray();
-		mesh.normals = Norms.ToArray();
-		mesh.uv = UVs.ToArray();
-		mesh.triangles = Tris.ToArray();
+		mesh.vertices   = verts.ToArray();
+		mesh.normals    = norms.ToArray();
+		mesh.uv         = uvs.ToArray();
+		mesh.triangles  = tris.ToArray();
 		 
 		mesh.RecalculateBounds();
 
@@ -95,9 +96,9 @@ public class Chunk : MonoBehaviour {
   ///     CreateChunk
   ///------------------------------------------
   /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/ 
-	public void CreateChunk(int w, int h, int d) {
+	public void CreateChunk(int pWidth, int pHeight, int pDepth) {
 
-		BuildChunk( w, h, d );
+		BuildChunk( pWidth, pHeight, pDepth );
 
     DrawChunk();
 

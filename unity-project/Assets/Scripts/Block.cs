@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Block {
 
-	enum Cubeside {BOTTOM, TOP, LEFT, RIGHT, FRONT, BACK};
-	public enum BlockType {GRASS, DIRT, STONE, AIR};
+	
+  private enum Cubeside {BOTTOM, TOP, LEFT, RIGHT, FRONT, BACK};
 
   // Public data
 	public  bool        isSolid;
@@ -42,21 +42,21 @@ public class Block {
   ///     Constructor
   ///------------------------------------------
   /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/ 
-	public Block(BlockType b, Vector3 pos, GameObject p, Material c){
+	public Block(BlockType pBlockType, Vector3 pPos, GameObject pParent, Material pCubeMaterial){
 
-		bType = b;
-		parent = p;
-		position = pos;
-		cubeMaterial = c;
+		bType         = pBlockType;
+		parent        = pParent;
+		position      = pPos;
+		cubeMaterial  = pCubeMaterial;
 
-		if(bType == BlockType.AIR)
+		if ( bType == BlockType.AIR )
 			isSolid = false;
 		else
 			isSolid = true;
 
-		x = (int) pos.x;
-		y = (int) pos.y;
-		z = (int) pos.z;
+		x = (int)pPos.x;
+		y = (int)pPos.y;
+		z = (int)pPos.z;
 
 	}//END Constructor
 
@@ -67,7 +67,7 @@ public class Block {
   ///     CreateQuad
   ///------------------------------------------
   /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/ 
-	void CreateQuad(Cubeside side,List<Vector3> v, List<Vector3> n, List<Vector2> u, List<int> t){
+	void CreateQuad(Cubeside side,List<Vector3> pVerts, List<Vector3> pNormals, List<Vector2> pUVs, List<int> pTris){
 
 		Vector3[] vertices  = new Vector3[4];
 		Vector3[] normals   = new Vector3[4];
@@ -118,69 +118,75 @@ public class Block {
 		switch( side ){
 
 			case Cubeside.BOTTOM:
-				trioffset = v.Count;
-				v.Add(p0); v.Add(p1); v.Add(p2); v.Add(p3);
-				n.Add(World.allNormals[(int)World.NDIR.DOWN]);
-				n.Add(World.allNormals[(int)World.NDIR.DOWN]);
-				n.Add(World.allNormals[(int)World.NDIR.DOWN]);
-				n.Add(World.allNormals[(int)World.NDIR.DOWN]);
-				u.Add(uv11); u.Add(uv01); u.Add(uv00); u.Add(uv10);
-				t.Add(3 + trioffset); t.Add(1 + trioffset); t.Add(0 + trioffset); t.Add(3 + trioffset); t.Add(2 + trioffset); t.Add(1 + trioffset);
+				trioffset = pVerts.Count;
+				pVerts.Add(p0); pVerts.Add(p1); pVerts.Add(p2); pVerts.Add(p3);
+				pNormals.Add(World.allNormals[(int)World.NDIR.DOWN]);
+				pNormals.Add(World.allNormals[(int)World.NDIR.DOWN]);
+				pNormals.Add(World.allNormals[(int)World.NDIR.DOWN]);
+				pNormals.Add(World.allNormals[(int)World.NDIR.DOWN]);
+				pUVs.Add(uv11); pUVs.Add(uv01); pUVs.Add(uv00); pUVs.Add(uv10);
+				pTris.Add(3 + trioffset); pTris.Add(1 + trioffset); pTris.Add(0 + trioffset); 
+        pTris.Add(3 + trioffset); pTris.Add(2 + trioffset); pTris.Add(1 + trioffset);
 			break;
 
 			case Cubeside.TOP:
-				trioffset = v.Count;
-				v.Add(p7); v.Add(p6); v.Add(p5); v.Add(p4);
-				n.Add(World.allNormals[(int)World.NDIR.UP]);
-				n.Add(World.allNormals[(int)World.NDIR.UP]);
-				n.Add(World.allNormals[(int)World.NDIR.UP]);
-				n.Add(World.allNormals[(int)World.NDIR.UP]);
-				u.Add(uv11); u.Add(uv01); u.Add(uv00); u.Add(uv10);
-				t.Add(3 + trioffset); t.Add(1 + trioffset); t.Add(0 + trioffset); t.Add(3 + trioffset); t.Add(2 + trioffset); t.Add(1 + trioffset);
+				trioffset = pVerts.Count;
+				pVerts.Add(p7); pVerts.Add(p6); pVerts.Add(p5); pVerts.Add(p4);
+				pNormals.Add(World.allNormals[(int)World.NDIR.UP]);
+				pNormals.Add(World.allNormals[(int)World.NDIR.UP]);
+				pNormals.Add(World.allNormals[(int)World.NDIR.UP]);
+				pNormals.Add(World.allNormals[(int)World.NDIR.UP]);
+				pUVs.Add(uv11); pUVs.Add(uv01); pUVs.Add(uv00); pUVs.Add(uv10);
+				pTris.Add(3 + trioffset); pTris.Add(1 + trioffset); pTris.Add(0 + trioffset); 
+        pTris.Add(3 + trioffset); pTris.Add(2 + trioffset); pTris.Add(1 + trioffset);
 			break;
 
 			case Cubeside.LEFT:
-				trioffset = v.Count;
-				v.Add(p7); v.Add(p4); v.Add(p0); v.Add(p3);
-				n.Add(World.allNormals[(int)World.NDIR.LEFT]);
-				n.Add(World.allNormals[(int)World.NDIR.LEFT]);
-				n.Add(World.allNormals[(int)World.NDIR.LEFT]);
-				n.Add(World.allNormals[(int)World.NDIR.LEFT]);
-				u.Add(uv11); u.Add(uv01); u.Add(uv00); u.Add(uv10);
-				t.Add(3 + trioffset); t.Add(1 + trioffset); t.Add(0 + trioffset); t.Add(3 + trioffset); t.Add(2 + trioffset); t.Add(1 + trioffset);
+				trioffset = pVerts.Count;
+				pVerts.Add(p7); pVerts.Add(p4); pVerts.Add(p0); pVerts.Add(p3);
+				pNormals.Add(World.allNormals[(int)World.NDIR.LEFT]);
+				pNormals.Add(World.allNormals[(int)World.NDIR.LEFT]);
+				pNormals.Add(World.allNormals[(int)World.NDIR.LEFT]);
+				pNormals.Add(World.allNormals[(int)World.NDIR.LEFT]);
+				pUVs.Add(uv11); pUVs.Add(uv01); pUVs.Add(uv00); pUVs.Add(uv10);
+				pTris.Add(3 + trioffset); pTris.Add(1 + trioffset); pTris.Add(0 + trioffset); 
+        pTris.Add(3 + trioffset); pTris.Add(2 + trioffset); pTris.Add(1 + trioffset);
 			break;
 
 			case Cubeside.RIGHT:
-				trioffset = v.Count;
-				v.Add(p5); v.Add(p6); v.Add(p2); v.Add(p1);
-				n.Add(World.allNormals[(int)World.NDIR.RIGHT]);
-				n.Add(World.allNormals[(int)World.NDIR.RIGHT]);
-				n.Add(World.allNormals[(int)World.NDIR.RIGHT]);
-				n.Add(World.allNormals[(int)World.NDIR.RIGHT]);
-				u.Add(uv11); u.Add(uv01); u.Add(uv00); u.Add(uv10);
-				t.Add(3 + trioffset); t.Add(1 + trioffset); t.Add(0 + trioffset); t.Add(3 + trioffset); t.Add(2 + trioffset); t.Add(1 + trioffset);
+				trioffset = pVerts.Count;
+				pVerts.Add(p5); pVerts.Add(p6); pVerts.Add(p2); pVerts.Add(p1);
+				pNormals.Add(World.allNormals[(int)World.NDIR.RIGHT]);
+				pNormals.Add(World.allNormals[(int)World.NDIR.RIGHT]);
+				pNormals.Add(World.allNormals[(int)World.NDIR.RIGHT]);
+				pNormals.Add(World.allNormals[(int)World.NDIR.RIGHT]);
+				pUVs.Add(uv11); pUVs.Add(uv01); pUVs.Add(uv00); pUVs.Add(uv10);
+				pTris.Add(3 + trioffset); pTris.Add(1 + trioffset); pTris.Add(0 + trioffset); 
+        pTris.Add(3 + trioffset); pTris.Add(2 + trioffset); pTris.Add(1 + trioffset);
 			break;
 
 			case Cubeside.FRONT:
-				trioffset = v.Count;
-				v.Add(p4); v.Add(p5); v.Add(p1); v.Add(p0);
-				n.Add(World.allNormals[(int)World.NDIR.FRONT]);
-				n.Add(World.allNormals[(int)World.NDIR.FRONT]);
-				n.Add(World.allNormals[(int)World.NDIR.FRONT]);
-				n.Add(World.allNormals[(int)World.NDIR.FRONT]);
-				u.Add(uv11); u.Add(uv01); u.Add(uv00); u.Add(uv10);
-				t.Add(3 + trioffset); t.Add(1 + trioffset); t.Add(0 + trioffset); t.Add(3 + trioffset); t.Add(2 + trioffset); t.Add(1 + trioffset);
+				trioffset = pVerts.Count;
+				pVerts.Add(p4); pVerts.Add(p5); pVerts.Add(p1); pVerts.Add(p0);
+				pNormals.Add(World.allNormals[(int)World.NDIR.FRONT]);
+				pNormals.Add(World.allNormals[(int)World.NDIR.FRONT]);
+				pNormals.Add(World.allNormals[(int)World.NDIR.FRONT]);
+				pNormals.Add(World.allNormals[(int)World.NDIR.FRONT]);
+				pUVs.Add(uv11); pUVs.Add(uv01); pUVs.Add(uv00); pUVs.Add(uv10);
+				pTris.Add(3 + trioffset); pTris.Add(1 + trioffset); pTris.Add(0 + trioffset); 
+        pTris.Add(3 + trioffset); pTris.Add(2 + trioffset); pTris.Add(1 + trioffset);
 			break;
 
 			case Cubeside.BACK:
-				trioffset = v.Count;
-				v.Add(p6); v.Add(p7); v.Add(p3); v.Add(p2);
-				n.Add(World.allNormals[(int)World.NDIR.BACK]);
-				n.Add(World.allNormals[(int)World.NDIR.BACK]);
-				n.Add(World.allNormals[(int)World.NDIR.BACK]);
-				n.Add(World.allNormals[(int)World.NDIR.BACK]);
-				u.Add(uv11); u.Add(uv01); u.Add(uv00); u.Add(uv10);
-				t.Add(3 + trioffset); t.Add(1 + trioffset); t.Add(0 + trioffset); t.Add(3 + trioffset); t.Add(2 + trioffset); t.Add(1 + trioffset);
+				trioffset = pVerts.Count;
+				pVerts.Add(p6); pVerts.Add(p7); pVerts.Add(p3); pVerts.Add(p2);
+				pNormals.Add(World.allNormals[(int)World.NDIR.BACK]);
+				pNormals.Add(World.allNormals[(int)World.NDIR.BACK]);
+				pNormals.Add(World.allNormals[(int)World.NDIR.BACK]);
+				pNormals.Add(World.allNormals[(int)World.NDIR.BACK]);
+				pUVs.Add(uv11); pUVs.Add(uv01); pUVs.Add(uv00); pUVs.Add(uv10);
+				pTris.Add(3 + trioffset); pTris.Add(1 + trioffset); pTris.Add(0 + trioffset); 
+        pTris.Add(3 + trioffset); pTris.Add(2 + trioffset); pTris.Add(1 + trioffset);
 			break;
 		
     }//END switch
@@ -212,28 +218,28 @@ public class Block {
   ///     Draw
   ///------------------------------------------
   /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/ 
-	public void Draw(List<Vector3> v, List<Vector3> n, List<Vector2> u, List<int> t){
+	public void Draw(List<Vector3> pVerts, List<Vector3> pNormals, List<Vector2> pUVs, List<int> pTris){
 
 		if ( bType == BlockType.AIR ) 
       return;
 
 		if ( !HasSolidNeighbour((int)position.x,(int)position.y,(int)position.z + 1) )
-			CreateQuad( Cubeside.FRONT, v, n, u, t );
+			CreateQuad( Cubeside.FRONT, pVerts, pNormals, pUVs, pTris );
 
 		if ( !HasSolidNeighbour((int)position.x,(int)position.y,(int)position.z - 1) )
-			CreateQuad( Cubeside.BACK, v, n, u, t );
+			CreateQuad( Cubeside.BACK, pVerts, pNormals, pUVs, pTris );
 
     if ( !HasSolidNeighbour((int)position.x,(int)position.y + 1,(int)position.z) )
-			CreateQuad( Cubeside.TOP, v, n, u, t );
+			CreateQuad( Cubeside.TOP, pVerts, pNormals, pUVs, pTris );
 		
     if ( !HasSolidNeighbour((int)position.x,(int)position.y - 1,(int)position.z) )
-			CreateQuad( Cubeside.BOTTOM, v, n, u, t );
+			CreateQuad( Cubeside.BOTTOM, pVerts, pNormals, pUVs, pTris );
 		
     if ( !HasSolidNeighbour((int)position.x - 1,(int)position.y,(int)position.z) )
-			CreateQuad( Cubeside.LEFT, v, n, u, t );
+			CreateQuad( Cubeside.LEFT, pVerts, pNormals, pUVs, pTris );
 		
     if ( !HasSolidNeighbour((int)position.x + 1,(int)position.y,(int)position.z) )
-			CreateQuad( Cubeside.RIGHT, v, n, u, t );
+			CreateQuad( Cubeside.RIGHT, pVerts, pNormals, pUVs, pTris );
 	
   }//END Draw
 
