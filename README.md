@@ -48,16 +48,14 @@ First off we'll need [Android Studio](https://developer.android.com/studio). If 
 
 **⚠️ Important ⚠️** --> If you just want to build/run the project, you'll only need to clone the repo and then open the embedded-unity-player project in Android Studio, installing any dependencies and artifacts it recommends, and then run/build the project.
 
-If you want to recreate this yourself though, there are a few steps included, so let's get to it! 😃
-
-
 #### Clone
 ```
 # Clone the repo
 git clone https://github.com/BrentKilbasco/embedded-unity-player
 ```
 
-Ok, now for the step to recreate this project from scratch!
+If you want to recreate this from scratch yourself though, there are a few steps included, so let's get to it! 😃
+
 
 #### 1. Set up your Unity project
 
