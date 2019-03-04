@@ -24,7 +24,7 @@ The goal of this project is to embed a Unity player window within a native Andro
 
 ## 🧠 Motivation
 
-Unity is a wonderful engine, I started using it the week the editor was released for Windows and I still absolutely love it. When running on mobile devices though, there tends to be a decent amount of overhead and Unity apps tend to be more resource intensive to run than a native app - a completely empty Unity project built to mobile will use considerably more resources than an empty Android project. Resources can sometimes end up being wasted, in a sense, especially so with apps that are largely menu based, and only display 3d content, or games, for a portion of the time the user interacts with the app. Another pain point is that building UI that looks and feels like native UI tends to be much more time consuming to build in Unity than in the respective native IDE.
+Unity is a wonderful engine, I started using it the week the editor was released for Windows and I still absolutely love it. When running on mobile devices though, there tends to be a decent amount of overhead and Unity apps tend to be more resource intensive to run than a native app - a completely empty Unity project built to mobile will use considerably more resources than an empty Android project. Resources can sometimes end up being wasted, in a sense, especially so with apps that are largely menu based, and only display 3d content, or games, for a portion of the time the user interacts with the app. Another thing to consider is that building UI that looks and feels like native UI tends to be much more time consuming to build in Unity than in the respective native IDE.
 
 So I was curious if there was a way, within a native mobile app, to trigger Unity to open inside of a native view so it could be treated like any other view - draw UI elements over top of it, control content within it, and create/destroy it at any given time. Turns out there’s a way! After a bit of digging around and compiling info from several different how-to guides, I managed to get things running. Woot!
 
@@ -235,7 +235,15 @@ android {
 
 ```
 
-#### 9. Start the UnityPlayerActivity anywhere you want
+#### 9. Update the main project AndroidManifest
+
+We'll need to make a small update to the main project's AndroidManifest to add a reference to the Activity class.
+
+```xml
+<activity android:name="com.whatever.yourlibrarynamewas.UnityPlayerActivity" />
+```
+
+#### 10. Start the UnityPlayerActivity anywhere you want
 
 So now with that done, in our main Android app project we are able to create, destroy, start, and stop a UnityPlayerActivity whenever we want, and from whatever Activity or Fragment we want. Cool! 
 
@@ -250,8 +258,7 @@ protected void openUnityView(){
 }//END openUnityView
 ```
 
-
-#### 10. Optional settings
+#### 11. Optional settings
 
 This step is optional, but I think it's worth mentioning. Just three things I want to point out. First is that since we're embedding Unity with the native view, we probably don't want to hide the title/status bar at the top when Unity starts. We can prevent the status bar from hiding by removing the following from the UnityPlayerActivity file that Unity automatically generates in the Gradle project export process:
 ```java
