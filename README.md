@@ -307,7 +307,12 @@ If your version of Unity has changed since the last time you exported from Unity
 Phew! Ok so we made it to the end, yay! Hopefully this all made sense and things are running on your end. Of course if you come across any issues, feel free to give me a shout.
 
 
-## 👊 Further Help?
+## 🤜🤛 Credits
+
+Thanks to Penny de Byl and her videos on coding voxel worlds, which helped in creating a fun 3d object to display in the Unity player window.
+
+
+## 🤷 Further Help?
 
 Need further help? No worries! Just [get in touch with me directly](http://portfolio.bkilbasco.com) 😄
 
