@@ -264,7 +264,7 @@ One other thing I'd like to mention is that adding the following line of code sh
 getWindow().setFormat( PixelFormat.RGBX_8888 );
 ```
 
-And last, but definitely most exciting, is that we're able to extend from the UnityPlayerActivity, or edit the original one further if you're so inclined. In my project I just added a Fragment class with one button and a transparent background and edited the original UnityPlayerActivity to open that Fragment over top. In a larger application it would probably be a better idea to extend from it. Anyways, mine ended up looking like:
+And last, but definitely most exciting, is that we're able to extend from the UnityPlayerActivity to add extra functionality, or edit the original one further if you're so inclined. In my project I just added a Fragment class with one button and a transparent background and edited the original UnityPlayerActivity to open that Fragment over top. In a larger application it would probably be a better idea to extend from it. Anyways, mine ended up looking like:
 
 ```java
 @Override
@@ -288,7 +288,7 @@ protected void onCreate(Bundle savedInstanceState) {
 ```
 
 
-#### 10. Clean and build
+#### 11. Clean and build
 
 And that's it, awesome! 👍 Ok cool, we should now be good to clean, build, and run the project. 
 
