@@ -295,7 +295,7 @@ And that's it, awesome! 👍 Ok cool, we should now be good to clean, build, and
 ## 🛠️ Updating an existing Sub-Project
 Need to update an existing sub project library? Okie, let's do that!
 
-First off, it's probably a good idea to make some back up copies of the project before updating it, or if your project is on git to commit everything before continuing so you have a fallback. This process is unfortunately not fool-proof. 
+First off, it's probably a good idea to make some back up copies of the project before updating it, or if your project is on git to commit everything before continuing so you have a fallback. This process is unfortunately rather manual. 
 
 Alright, so let's say you make some changes to the original Unity project and export an updated Gradle project from Unity. With all the little tweaks we did to the manifest, gradle files, and UnityPlayerActivity, we can't just copy and replace the full Unity project folder within the subProject folder. A lot of the auto generated files are boilerplate anyway, and are the same as the files we already have from last Gradle project export. If your version of Unity hasn't changed since the last time you exported the project as a Gradle project, there will be only one folder in the exported project structure you'll need to worry about - the src/main/assets folder. This assets folder contains all the compiled code and assets for your Unity project. Just copy and replace the old assets folder with this new one and you're good to go. After a clean and rebuild in Android Studio of course!
 
