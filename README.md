@@ -32,9 +32,9 @@ Future implementations include full two way communication between native Android
 
 ## 📷 Screenshots
 
-![Alt text](screenshots/ScreenShot_1.png?raw=true "shot 1")
-![Alt text](screenshots/ScreenShot_2.png?raw=true "shot 2")
-![Alt text](screenshots/ScreenShot_3.png?raw=true "shot 3")
+![Alt text](screenshots/ScreenShot_1.png | width=300 "shot 1")
+![Alt text](screenshots/ScreenShot_2.png | width=300 "shot 2")
+![Alt text](screenshots/ScreenShot_3.png | width=300 "shot 3")
 
 
 ## 🤔 Limitations and caveats
