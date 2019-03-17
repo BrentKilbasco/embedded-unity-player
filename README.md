@@ -33,7 +33,6 @@ Future implementations include full two way communication between native Android
 ## 📷 Screenshots
 
 ![Alt text](screenshots/ScreenShot_1.png?raw=true "Title")
-![Alt text](screenshots/ScreenShot_2.png?raw=true "Title")
 ![Alt text](screenshots/ScreenShot_3.png?raw=true "Title")
 
 
